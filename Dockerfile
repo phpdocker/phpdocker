@@ -10,8 +10,14 @@ MAINTAINER Jaroslav Hranicka <hranicka@outlook.com>
 		&& apt-get install -y libicu-dev \
 		&& apt-get install -y libmcrypt-dev \
 		&& apt-get install -y libxml2-dev \
-		&& apt-get install -y php5-xdebug \
-		&& docker-php-ext-install bcmath exif gd intl mbstring mcrypt mysqli pdo pdo_mysql soap xdebug
+		&& docker-php-ext-install bcmath exif gd intl mbstring mcrypt mysqli pdo pdo_mysql soap
+
+	# Install XDebug
+	# https://gist.github.com/chadrien/c90927ec2d160ffea9c4
+	RUN apt-get install -y php5-xdebug \
+        && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+        && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+        && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
 
 	# Install composer and put binary into $PATH
 	RUN curl -sS https://getcomposer.org/installer | php \
