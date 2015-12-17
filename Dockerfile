@@ -10,7 +10,8 @@ MAINTAINER Jaroslav Hranicka <hranicka@outlook.com>
 		&& apt-get install -y libicu-dev \
 		&& apt-get install -y libmcrypt-dev \
 		&& apt-get install -y libxml2-dev \
-		&& docker-php-ext-install bcmath exif gd intl mbstring mcrypt mysqli pdo pdo_mysql soap
+		&& apt-get install -y zlib1g-dev \
+		&& docker-php-ext-install bcmath exif gd intl mbstring mcrypt mysqli pdo pdo_mysql soap zip
 
 	# Install XDebug
 	# https://gist.github.com/chadrien/c90927ec2d160ffea9c4
@@ -45,7 +46,5 @@ MAINTAINER Jaroslav Hranicka <hranicka@outlook.com>
 		&& mysql_install_db
 
 	VOLUME /var/lib/mysql
-
-	ENTRYPOINT "mysqld_safe"
 
 	EXPOSE 3306
