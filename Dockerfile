@@ -1,4 +1,4 @@
-FROM php:5.4
+FROM php:5.5
 
 MAINTAINER Jaroslav Hranicka <hranicka@outlook.com>
 
