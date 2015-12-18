@@ -28,7 +28,6 @@ RUN chmod -R 700 /usr/local/bin/
 			exif \
 			mbstring \
 			mcrypt \
-			mysql \
 			mysqli \
 			pdo_mysql \
 			soap \
