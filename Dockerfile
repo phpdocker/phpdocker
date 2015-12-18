@@ -8,22 +8,36 @@ RUN chmod -R 700 /usr/local/bin/
 # PHP
 	# Enable PHP extensions
 	RUN apt-get update \
+		&& apt-get install -y libgmp-dev \
+		&& apt-get install -y libbz2-dev \
 		&& apt-get install -y libfreetype6-dev \
 		&& apt-get install -y libjpeg62-turbo-dev \
 		&& apt-get install -y libpng12-dev \
 		&& apt-get install -y libicu-dev \
 		&& apt-get install -y libmcrypt-dev \
 		&& apt-get install -y libxml2-dev \
+		&& apt-get install -y libxslt-dev \
 		&& apt-get install -y zlib1g-dev \
+		&& ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h  \
 		&& docker-php-ext-install \
+			bz2 \
 			bcmath \
+			gmp \
+			gettext \
+			bz2 \
 			exif \
 			mbstring \
 			mcrypt \
+			mysql \
 			mysqli \
-			pdo \
 			pdo_mysql \
 			soap \
+			sockets \
+			sysvmsg \
+			sysvsem \
+			sysvshm \
+			xmlrpc \
+			xsl \
 			zip \
 		&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
 		&& docker-php-ext-install gd \
@@ -48,6 +62,8 @@ RUN chmod -R 700 /usr/local/bin/
 		&& chmod 755 phpcbf.phar \
 		&& mv phpcbf.phar /usr/local/bin/ \
 		&& ln -s /usr/local/bin/phpcbf.phar /usr/local/bin/phpcbf
+
+	ADD php.ini /usr/local/etc/php/conf.d/docker-php.ini
 
 
 # MariaDB
