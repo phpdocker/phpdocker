@@ -2,23 +2,37 @@ FROM php:5.4
 
 MAINTAINER Jaroslav Hranicka <hranicka@outlook.com>
 
+COPY bin/* /usr/local/bin/
+RUN chmod -R 700 /usr/local/bin/
 
 # PHP
 	# Enable PHP extensions
 	RUN apt-get update \
+		&& apt-get install -y libfreetype6-dev \
+		&& apt-get install -y libjpeg62-turbo-dev \
 		&& apt-get install -y libpng12-dev \
 		&& apt-get install -y libicu-dev \
 		&& apt-get install -y libmcrypt-dev \
 		&& apt-get install -y libxml2-dev \
 		&& apt-get install -y zlib1g-dev \
-		&& docker-php-ext-install bcmath exif gd intl mbstring mcrypt mysqli pdo pdo_mysql soap zip
+		&& docker-php-ext-install \
+			bcmath \
+			exif \
+			mbstring \
+			mcrypt \
+			mysqli \
+			pdo \
+			pdo_mysql \
+			soap \
+			zip \
+		&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+		&& docker-php-ext-install gd \
+		&& docker-php-ext-configure intl \
+		&& docker-php-ext-install intl
 
-	# Install XDebug
-	# https://gist.github.com/chadrien/c90927ec2d160ffea9c4
-	RUN apt-get install -y php5-xdebug \
-        && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
-        && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-        && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
+	# XDebug
+	# https://github.com/helderco/docker-php
+	RUN docker-php-pecl-install xdebug-2.4.0RC3
 
 	# Install composer and put binary into $PATH
 	RUN curl -sS https://getcomposer.org/installer | php \
