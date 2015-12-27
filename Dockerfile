@@ -45,7 +45,7 @@ RUN chmod -R 700 /usr/local/bin/
 
 	# XDebug
 	# https://github.com/helderco/docker-php
-	RUN docker-php-pecl-install xdebug redis
+	RUN docker-php-pecl-install xdebug redis apcu
 
 	# Install composer and put binary into $PATH
 	RUN curl -sS https://getcomposer.org/installer | php \
