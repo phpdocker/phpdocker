@@ -80,11 +80,15 @@ RUN chmod -R 700 /usr/local/bin/
 
 	ADD my.cnf /etc/mysql/conf.d/my.cnf
 
+	CMD ["service mysql start"]
+
 	EXPOSE 3306
 
 
 # Redis
 	RUN apt-get update \
 		&& apt-get install -y redis-server
+
+	CMD ["service redis-server start"]
 
 	EXPOSE 6379
