@@ -1,4 +1,4 @@
-FROM php:7.0
+FROM php:7.0-fpm
 
 MAINTAINER Jaroslav Hranicka <hranicka@outlook.com>
 
@@ -45,7 +45,7 @@ RUN chmod -R 700 /usr/local/bin/
 
 	# XDebug
 	# https://github.com/helderco/docker-php
-	RUN docker-php-pecl-install xdebug-2.4.0RC3
+	RUN docker-php-pecl-install xdebug-2.4.0RC3 redis
 
 	# Install composer and put binary into $PATH
 	RUN curl -sS https://getcomposer.org/installer | php \
@@ -62,15 +62,17 @@ RUN chmod -R 700 /usr/local/bin/
 		&& mv phpcbf.phar /usr/local/bin/ \
 		&& ln -s /usr/local/bin/phpcbf.phar /usr/local/bin/phpcbf
 
+	# Install PHPUnit
+	RUN curl -OL https://phar.phpunit.de/phpunit.phar \
+		&& chmod 755 phpunit.phar \
+		&& mv phpunit.phar /usr/local/bin/ \
+		&& ln -s /usr/local/bin/phpunit.phar /usr/local/bin/phpunit
+
 	ADD php.ini /usr/local/etc/php/conf.d/docker-php.ini
 
 
 # MariaDB
 	RUN apt-get update \
-		&& apt-get install -y software-properties-common \
-		&& apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db \
-		&& add-apt-repository 'deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/debian jessie main' \
-		&& apt-get update \
 		&& DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server \
 		&& mysql_install_db
 
@@ -78,4 +80,15 @@ RUN chmod -R 700 /usr/local/bin/
 
 	ADD my.cnf /etc/mysql/conf.d/my.cnf
 
+	CMD ["service mysql start"]
+
 	EXPOSE 3306
+
+
+# Redis
+	RUN apt-get update \
+		&& apt-get install -y redis-server
+
+	CMD ["service redis-server start"]
+
+	EXPOSE 6379
