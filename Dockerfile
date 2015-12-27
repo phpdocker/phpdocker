@@ -73,10 +73,6 @@ RUN chmod -R 700 /usr/local/bin/
 
 # MariaDB
 	RUN apt-get update \
-		&& apt-get install -y software-properties-common \
-		&& apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db \
-		&& add-apt-repository 'deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/debian jessie main' \
-		&& apt-get update \
 		&& DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server \
 		&& mysql_install_db
 
