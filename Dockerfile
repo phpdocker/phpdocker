@@ -45,7 +45,7 @@ RUN chmod -R 700 /usr/local/bin/
 
 	# XDebug
 	# https://github.com/helderco/docker-php
-	RUN docker-php-pecl-install xdebug-2.4.0RC3
+	RUN docker-php-pecl-install xdebug-2.4.0RC3 redis
 
 	# Install composer and put binary into $PATH
 	RUN curl -sS https://getcomposer.org/installer | php \
@@ -85,3 +85,10 @@ RUN chmod -R 700 /usr/local/bin/
 	ADD my.cnf /etc/mysql/conf.d/my.cnf
 
 	EXPOSE 3306
+
+
+# Redis
+	RUN apt-get update \
+		&& apt-get install -y redis-server
+
+	EXPOSE 6379
