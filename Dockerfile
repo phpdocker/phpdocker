@@ -62,6 +62,12 @@ RUN chmod -R 700 /usr/local/bin/
 		&& mv phpcbf.phar /usr/local/bin/ \
 		&& ln -s /usr/local/bin/phpcbf.phar /usr/local/bin/phpcbf
 
+	# Install PHPUnit
+	RUN curl -OL https://phar.phpunit.de/phpunit.phar \
+		&& chmod 755 phpunit.phar \
+		&& mv phpunit.phar /usr/local/bin/ \
+		&& ln -s /usr/local/bin/phpunit.phar /usr/local/bin/phpunit
+
 	ADD php.ini /usr/local/etc/php/conf.d/docker-php.ini
 
 
