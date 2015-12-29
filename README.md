@@ -2,22 +2,20 @@
 
 ## Usage
 
-### Pull Docker image
+* Docker image is available at [Docker Hub](https://hub.docker.com/r/phpdocker/phpdocker/).
+* The primary goal of this Docker image is custom image for CI, but you can obviously use it like you want.
 
-```bash
+## Example
 
-$ docker pull phpdocker/phpdocker
-```
+* [Shippable CI](https://bitbucket.org/hranicka/composer-sandbox/src/master/shippable.yml?at=master&fileviewer=file-view-default) custom container
 
-### Available tags
+## Tags
 
 * Tags depend on version of PHP included.
 * They are given by git branches.
 * You can see them at [Docker Hub](https://hub.docker.com/r/phpdocker/phpdocker/tags/).
 
-### 
-
-## Available applications
+## Built-in applications
 
 * [PHP](http://php.net) (from official [PHP Docker images](https://registry.hub.docker.com/_/php/))
 * [MariaDB](https://mariadb.org)
