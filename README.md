@@ -32,6 +32,9 @@
 
 * PHP is started automatically.
 * You can type PHP commands, eg. `php -r "echo 1;"`.
+* Each Docker image contains ONLY ONE VERSION OF PHP, so:
+	* If you need PHP 5.6, use `phpdocker/phpdocker:5.6`.
+	* If you need PHP 7.0, use `phpdocker/phpdocker:7.0`.
 
 ### MariaDB
 
