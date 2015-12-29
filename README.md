@@ -15,9 +15,12 @@
 * They are given by git branches.
 * You can see them at [Docker Hub](https://hub.docker.com/r/phpdocker/phpdocker/tags/).
 
+---
+
 ## Built-in applications
 
 * [PHP](http://php.net) (from official [PHP Docker images](https://registry.hub.docker.com/_/php/))
+* [XDebug](http://xdebug.org)
 * [MariaDB](https://mariadb.org)
 * [Redis](http://redis.io)
 * [APCu](http://php.net/apcu)
