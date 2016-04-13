@@ -70,6 +70,13 @@ RUN chmod -R 700 /usr/local/bin/
 			zip \
 			bz2
 
+	# ftp
+	RUN apt-get update \
+		&& apt-get install -y \
+		libssl-dev \
+		&& docker-php-ext-install \
+			ftp
+
 	# others
 	RUN docker-php-ext-install \
 		soap \
