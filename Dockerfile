@@ -87,7 +87,7 @@ RUN chmod -R 700 /usr/local/bin/
 
 	# PECL
 	RUN docker-php-pecl-install \
-		xdebug-2.4.0RC4 \
+		xdebug \
 		redis \
 		apcu
 
