@@ -152,4 +152,4 @@ RUN chmod -R 700 /usr/local/bin/
 
 # Clean all
 	RUN apt-get clean
-	RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+	RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
