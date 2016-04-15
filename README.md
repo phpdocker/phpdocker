@@ -22,6 +22,7 @@
 * [PHP](http://php.net) (from official [PHP Docker images](https://registry.hub.docker.com/_/php/))
 * [XDebug](http://xdebug.org)
 * [MariaDB](https://mariadb.org)
+* [SSH2](http://php.net/ssh2)
 * [Redis](http://redis.io)
 * [APCu](http://php.net/apcu)
 * [Composer](https://getcomposer.org)
