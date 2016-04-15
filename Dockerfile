@@ -7,7 +7,9 @@ RUN chmod -R 700 /usr/local/bin/
 
 # PHP
 	RUN apt-get update \
-		&& apt-get install -y openssl
+		&& apt-get install -y \
+			openssl \
+			git
 
 	# intl
 	RUN apt-get update \
@@ -77,6 +79,11 @@ RUN chmod -R 700 /usr/local/bin/
 		&& docker-php-ext-install \
 			ftp
 
+	# ssh2
+	RUN apt-get update \
+		&& apt-get install -y \
+		libssh2-1-dev
+
 	# others
 	RUN docker-php-ext-install \
 		soap \
@@ -88,8 +95,17 @@ RUN chmod -R 700 /usr/local/bin/
 	# PECL
 	RUN docker-php-pecl-install \
 		xdebug \
-		redis \
+#		ssh2 \ # TODO PECL not available for PHP 7 yet, we must compile it.
+#		redis \ # TODO PECL not available for PHP 7 yet, we must compile it.
 		apcu
+
+	# TODO PECL not available for PHP 7 yet, we must compile it.
+	RUN git clone https://github.com/php/pecl-networking-ssh2.git /usr/src/php/ext/ssh2 \
+		&& docker-php-ext-install ssh2
+
+	# TODO PECL not available for PHP 7 yet, we must compile it.
+	RUN git clone -b php7 https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
+		&& docker-php-ext-install redis
 
 	# Install composer and put binary into $PATH
 	RUN curl -sS https://getcomposer.org/installer | php \
