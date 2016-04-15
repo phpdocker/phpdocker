@@ -25,6 +25,8 @@
 	* [SSH2](http://php.net/ssh2)
 	* [Redis](http://redis.io)
 	* [APCu](http://php.net/apcu)
+* [NodeJS](https://nodejs.org)
+	* [Bower](http://bower.io)
 * [MariaDB](https://mariadb.org)
 * [Composer](https://getcomposer.org)
 * [PHP_CodeSniffer](https://www.squizlabs.com/php-codesniffer) 

@@ -5,12 +5,15 @@ MAINTAINER Jaroslav Hranicka <hranicka@outlook.com>
 COPY bin/* /usr/local/bin/
 RUN chmod -R 700 /usr/local/bin/
 
-# PHP
+
+# Common
 	RUN apt-get update \
 		&& apt-get install -y \
 			openssl \
 			git
 
+
+# PHP
 	# intl
 	RUN apt-get update \
 		&& apt-get install -y libicu-dev \
@@ -129,6 +132,15 @@ RUN chmod -R 700 /usr/local/bin/
 		&& ln -s /usr/local/bin/phpunit.phar /usr/local/bin/phpunit
 
 	ADD php.ini /usr/local/etc/php/conf.d/docker-php.ini
+
+
+## NodeJS, NPM
+	# Install NodeJS
+	RUN curl -sL https://deb.nodesource.com/setup_4.x | -E bash - \
+		&& apt-get install -y nodejs
+
+	# Install Bower globally
+	RUN npm install -g bower
 
 
 # MariaDB
