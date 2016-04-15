@@ -95,17 +95,9 @@ RUN chmod -R 700 /usr/local/bin/
 	# PECL
 	RUN docker-php-pecl-install \
 		xdebug \
-#		ssh2 \ # TODO PECL not available for PHP 7 yet, we must compile it.
-#		redis \ # TODO PECL not available for PHP 7 yet, we must compile it.
+		ssh2-0.12 \
+		redis \
 		apcu
-
-	# TODO PECL not available for PHP 7 yet, we must compile it.
-	RUN git clone https://github.com/php/pecl-networking-ssh2.git /usr/src/php/ext/ssh2 \
-		&& docker-php-ext-install ssh2
-
-	# TODO PECL not available for PHP 7 yet, we must compile it.
-	RUN git clone -b php7 https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
-		&& docker-php-ext-install redis
 
 	# Install composer and put binary into $PATH
 	RUN curl -sS https://getcomposer.org/installer | php \
