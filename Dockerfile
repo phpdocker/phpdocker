@@ -148,3 +148,8 @@ RUN chmod -R 700 /usr/local/bin/
 		&& apt-get install -y redis-server
 
 	EXPOSE 6379
+
+
+# Clean all
+	RUN apt-get clean
+	RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
