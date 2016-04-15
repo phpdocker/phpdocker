@@ -19,11 +19,13 @@
 
 ## Built-in applications
 
+* [GIT](https://git-scm.com/)
 * [PHP](http://php.net) (from official [PHP Docker images](https://registry.hub.docker.com/_/php/))
-* [XDebug](http://xdebug.org)
+	* [XDebug](http://xdebug.org)
+	* [SSH2](http://php.net/ssh2)
+	* [Redis](http://redis.io)
+	* [APCu](http://php.net/apcu)
 * [MariaDB](https://mariadb.org)
-* [Redis](http://redis.io)
-* [APCu](http://php.net/apcu)
 * [Composer](https://getcomposer.org)
 * [PHP_CodeSniffer](https://www.squizlabs.com/php-codesniffer) 
 * [PHPUnit](https://phpunit.de)
