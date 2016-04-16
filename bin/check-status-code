@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Usage:
+# URL="https://www.prospanek.cz" check-status-code
+
+STATUS=$(curl --write-out "%{http_code}\n" --silent --insecure --output /dev/null $URL)
+echo $STATUS
+
+if [ $STATUS != "200" ] ; then
+    exit 1
+fi

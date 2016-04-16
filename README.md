@@ -17,6 +17,16 @@
 
 ---
 
+## Available Bash scripts
+
+### [check-status-code](bin/check-status-code)
+
+This performs a HTTP Request and checks returned status code.
+
+Returns non-zero exit code when status is not 200 (OK).
+
+Usage: `URL="https://www.example.com" check-status-code`
+
 ## Built-in applications
 
 * [GIT](https://git-scm.com/)
