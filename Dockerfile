@@ -2,13 +2,21 @@ FROM php:7.0-fpm
 
 MAINTAINER Jaroslav Hranicka <hranicka@outlook.com>
 
+ENV DEBIAN_FRONTEND noninteractive
 COPY bin/* /usr/local/bin/
 RUN chmod -R 700 /usr/local/bin/
 
 
 # Common
-	RUN locale-gen en_US.UTF-8 \
+	RUN apt-get update \
+		&& apt-get install -y \
+			locales -qq \
+		&& locale-gen en_US.UTF-8 en_us \
 		&& dpkg-reconfigure locales
+
+	ENV LANG en_US.UTF-8
+	ENV LANGUAGE en_US:en
+	ENV LC_ALL en_US.UTF-8
 
 	RUN apt-get update \
 		&& apt-get install -y \
@@ -159,7 +167,7 @@ RUN chmod -R 700 /usr/local/bin/
 		&& add-apt-repository 'deb [arch=amd64,i386] http://mirror.vpsfree.cz/mariadb/repo/10.1/debian jessie main'
 
 	RUN apt-get update \
-		&& DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server \
+		&& apt-get install -y mariadb-server \
 		&& mysql_install_db
 
 	VOLUME /var/lib/mysql
