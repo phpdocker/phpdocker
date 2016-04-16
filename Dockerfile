@@ -7,17 +7,23 @@ COPY bin/* /usr/local/bin/
 RUN chmod -R 700 /usr/local/bin/
 
 
-# Common
+# Locales
 	RUN apt-get update \
-		&& apt-get install -y \
-			locales -qq \
-		&& locale-gen en_US.UTF-8 en_us \
-		&& dpkg-reconfigure locales
+		&& apt-get install -y locales
 
+	RUN dpkg-reconfigure locales \
+		&& locale-gen C.UTF-8 \
+		&& /usr/sbin/update-locale LANG=C.UTF-8
+
+	RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen \
+		&& locale-gen
+
+	ENV LC_ALL C.UTF-8
 	ENV LANG en_US.UTF-8
-	ENV LANGUAGE en_US:en
-	ENV LC_ALL en_US.UTF-8
+	ENV LANGUAGE en_US.UTF-8
 
+
+# Common
 	RUN apt-get update \
 		&& apt-get install -y \
 			openssl \
