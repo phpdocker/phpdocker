@@ -4,12 +4,12 @@
 # URL="https://www.prospanek.cz" check-status-code
 
 STATUS=$(curl --write-out "%{http_code}\n" --silent --insecure --output /dev/null $URL)
-echo "$STATUS\n"
+echo $STATUS
 
 if [ $STATUS == "200" ] ; then
-	echo "OK\n"
+	echo "OK"
     exit 0
 else
-	echo "FAIL\n"
+	echo "FAIL"
 	exit 1
 fi
