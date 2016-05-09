@@ -27,6 +27,10 @@ Returns non-zero exit code when status is not 200 (OK).
 
 Usage: `URL="https://www.example.com" check-status-code`
 
+Returns non-zero exit code when status is not 403 (Forbidden).
+
+Usage: `URL="https://www.example.com" STATUS=403 check-status-code`
+
 ## Built-in applications
 
 * [GIT](https://git-scm.com/)

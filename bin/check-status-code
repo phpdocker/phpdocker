@@ -2,11 +2,13 @@
 
 # Usage:
 # URL="https://www.prospanek.cz" check-status-code
+# URL="https://www.prospanek.cz" STATUS=200 check-status-code
+# URL="https://www.prospanek.cz" STATUS=301 check-status-code
 
-STATUS=$(curl --write-out "%{http_code}\n" --silent --insecure --output /dev/null $URL)
-echo $STATUS
+RESPONSE_STATUS=$(curl --write-out "%{http_code}\n" --silent --insecure --output /dev/null $URL)
+echo $RESPONSE_STATUS
 
-if [ $STATUS == "200" ] ; then
+if [ $RESPONSE_STATUS == ${STATUS:-200} ] ; then
 	echo "OK"
     exit 0
 else
