@@ -114,10 +114,10 @@ RUN chmod -R 700 /usr/local/bin/
 
 	# PECL
 	RUN docker-php-pecl-install \
-		xdebug \
+		xdebug-2.4.0 \
 		ssh2-0.12 \
-		redis \
-		apcu
+		redis-2.2.7 \
+		apcu-4.0.11
 
 	# Install composer and put binary into $PATH
 	RUN curl -sS https://getcomposer.org/installer | php \
