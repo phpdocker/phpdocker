@@ -117,7 +117,7 @@ RUN chmod -R 700 /usr/local/bin/
 		xdebug \
 #		ssh2 \ # TODO PECL not available for PHP 7 yet, we must compile it.
 #		redis \ # TODO PECL not available for PHP 7 yet, we must compile it.
-		apcu
+		apcu-5.1.3
 
 	# TODO PECL not available for PHP 7 yet, we must compile it.
 	RUN git clone https://github.com/php/pecl-networking-ssh2.git /usr/src/php/ext/ssh2 \
