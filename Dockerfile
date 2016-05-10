@@ -114,7 +114,7 @@ RUN chmod -R 700 /usr/local/bin/
 
 	# PECL
 	RUN docker-php-pecl-install \
-		xdebug \
+		xdebug-2.4.0 \
 #		ssh2 \ # TODO PECL not available for PHP 7 yet, we must compile it.
 #		redis \ # TODO PECL not available for PHP 7 yet, we must compile it.
 		apcu-5.1.3
