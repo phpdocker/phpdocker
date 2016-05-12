@@ -36,6 +36,8 @@ Usage: `URL="https://www.example.com" STATUS=403 check-status-code`
 * [GIT](https://git-scm.com/)
 * [PHP](http://php.net) (from official [PHP Docker images](https://registry.hub.docker.com/_/php/))
 	* [XDebug](http://xdebug.org)
+		* XDebug is not enabled by default, see i.e. [Composer docs](https://getcomposer.org/doc/articles/troubleshooting.md#xdebug-impact-on-composer)
+		* You can run script with XDebug enabled like: `php -d$XDEBUG_EXT vendor/bin/phpunit` or `php_xdebug vendor/bin/phpunit`
 	* [SSH2](http://php.net/ssh2)
 	* [Redis](http://redis.io)
 	* [APCu](http://php.net/apcu)

@@ -114,10 +114,16 @@ RUN chmod -R 700 /usr/local/bin/
 
 	# PECL
 	RUN docker-php-pecl-install \
-		xdebug-2.4.0 \
 #		ssh2 \ # TODO PECL not available for PHP 7 yet, we must compile it.
 #		redis \ # TODO PECL not available for PHP 7 yet, we must compile it.
 		apcu-5.1.3
+
+	# Install XDebug, but not enable by default. Enable using:
+	# * php -d$XDEBUG_EXT vendor/bin/phpunit
+	# * php_xdebug vendor/bin/phpunit
+	RUN pecl install xdebug-2.4.0
+	ENV XDEBUG_EXT zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so
+	RUN alias php_xdebug="php -d$XDEBUG_EXT vendor/bin/phpunit"
 
 	# TODO PECL not available for PHP 7 yet, we must compile it.
 	RUN git clone https://github.com/php/pecl-networking-ssh2.git /usr/src/php/ext/ssh2 \
