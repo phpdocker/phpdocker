@@ -167,14 +167,8 @@ RUN chmod -R 700 /usr/local/bin/
 
 ## NodeJS, NPM
 	# Install NodeJS
-	RUN curl -sL https://deb.nodesource.com/setup_4.x \
-		&& apt-get update \
-		&& apt-get install -y \
-		nodejs \
-		npm
-
-	# Symlink node to nodejs (required i.e. for Bower)
-    RUN ln /usr/bin/nodejs /usr/bin/node
+	RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - \
+		&& apt-get install -y nodejs
 
 	# Install Bower globally
 	RUN npm install -g bower
