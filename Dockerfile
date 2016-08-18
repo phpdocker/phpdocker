@@ -170,6 +170,9 @@ RUN chmod -R 700 /usr/local/bin/
 	RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - \
 		&& apt-get install -y nodejs
 
+	# Install Grunt globally
+	RUN npm install -g grunt-cli
+
 	# Install Bower globally
 	RUN npm install -g bower
 
