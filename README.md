@@ -44,6 +44,7 @@ Usage: `URL="https://www.example.com" STATUS=403 check-status-code`
 	* [Memcached](http://php.net/manual/en/book.memcached.php)
 * [NodeJS](https://nodejs.org)
 	* [Grunt](http://gruntjs.com/)
+	* [Gulp](http://gulpjs.com/)
 	* [Bower](http://bower.io)
 * [MariaDB](https://mariadb.org)
 * [Composer](https://getcomposer.org)

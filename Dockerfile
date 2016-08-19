@@ -173,6 +173,9 @@ RUN chmod -R 700 /usr/local/bin/
 	# Install Grunt globally
 	RUN npm install -g grunt-cli
 
+	# Install Gulp globally
+	RUN npm install -g gulp-cli
+
 	# Install Bower globally
 	RUN npm install -g bower
 
