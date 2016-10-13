@@ -170,6 +170,13 @@ RUN chmod -R 700 /usr/local/bin/
 	RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - \
 		&& apt-get install -y nodejs
 
+	# Install Yarn
+	RUN apt-key adv --keyserver pgp.mit.edu --recv D101F7899D41F3C3 \
+		&& echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+	RUN apt-get update \
+		&& apt-get install yarn
+
 	# Install Grunt globally
 	RUN npm install -g grunt-cli
 

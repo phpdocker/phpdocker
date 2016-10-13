@@ -43,6 +43,7 @@ Usage: `URL="https://www.example.com" STATUS=403 check-status-code`
 	* [APCu](http://php.net/apcu)
 	* [Memcached](http://php.net/manual/en/book.memcached.php)
 * [NodeJS](https://nodejs.org)
+	* [Yarn](https://yarnpkg.com/)
 	* [Grunt](http://gruntjs.com/)
 	* [Gulp](http://gulpjs.com/)
 	* [Bower](http://bower.io)
