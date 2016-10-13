@@ -175,7 +175,7 @@ RUN chmod -R 700 /usr/local/bin/
 		&& echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
 	RUN apt-get update \
-		&& apt-get install yarn
+		&& apt-get install -y yarn
 
 	# Install Grunt globally
 	RUN npm install -g grunt-cli
