@@ -167,7 +167,7 @@ RUN chmod -R 700 /usr/local/bin/
 
 ## NodeJS, NPM
 	# Install NodeJS
-	RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - \
+	RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
 		&& apt-get install -y nodejs
 
 	# Install Yarn
