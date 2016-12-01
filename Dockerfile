@@ -116,7 +116,7 @@ RUN chmod -R 700 /usr/local/bin/
 	RUN docker-php-pecl-install \
 #		ssh2-1.0 \
 		redis-3.0 \
-		apcu-5.1.5
+		apcu-5.1.7
 
 	# SSH2
 	# TODO PECL is buggy, we must compile it.
