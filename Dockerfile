@@ -114,9 +114,14 @@ RUN chmod -R 700 /usr/local/bin/
 
 	# PECL
 	RUN docker-php-pecl-install \
-		ssh2-1.0 \
+#		ssh2-1.0 \
 		redis-3.0 \
 		apcu-5.1.5
+
+	# SSH2
+	# TODO PECL is buggy, we must compile it.
+	RUN git clone https://github.com/php/pecl-networking-ssh2.git /usr/src/php/ext/ssh2 \
+		&& docker-php-ext-install ssh2
 
 	# Memcached
 	# TODO PECL not available for PHP 7 yet, we must compile it.
