@@ -142,7 +142,7 @@ RUN chmod -R 700 /usr/local/bin/
 	# Install XDebug, but not enable by default. Enable using:
 	# * php -d$XDEBUG_EXT vendor/bin/phpunit
 	# * php_xdebug vendor/bin/phpunit
-	RUN pecl install xdebug-2.4.1
+	RUN pecl install xdebug-2.5.0
 	ENV XDEBUG_EXT zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so
 	RUN alias php_xdebug="php -d$XDEBUG_EXT vendor/bin/phpunit"
 
