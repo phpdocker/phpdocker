@@ -109,6 +109,7 @@ RUN apt-get update \
 RUN docker-php-ext-install \
 	soap \
 	sockets \
+	calendar \
 	sysvmsg \
 	sysvsem \
 	sysvshm
