@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:7.2-fpm
 
 MAINTAINER Jaroslav Hranicka <hranicka@outlook.com>
 
@@ -28,7 +28,8 @@ ENV LANGUAGE en_US.UTF-8
 RUN apt-get update \
 	&& apt-get install -y \
 		openssl \
-		git
+		git \
+		gnupg2
 
 
 # PHP
@@ -53,7 +54,7 @@ RUN apt-get update \
 	&& apt-get install -y \
 	libfreetype6-dev \
 	libjpeg62-turbo-dev \
-	libpng12-dev \
+	libpng-dev \
 	libgd-dev \
 	&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
 	&& docker-php-ext-install \
@@ -65,11 +66,6 @@ RUN docker-php-ext-install \
 	mysqli \
 	pdo \
 	pdo_mysql
-
-# mcrypt
-RUN apt-get update \
-	&& apt-get install -y libmcrypt-dev \
-	&& docker-php-ext-install mcrypt
 
 # strings
 RUN docker-php-ext-install \
@@ -105,6 +101,13 @@ RUN apt-get update \
 	&& apt-get install -y \
 	libssh2-1-dev
 
+# memcached
+RUN apt-get update \
+	&& apt-get install -y \
+	libmemcached-dev \
+	libmemcached11
+
+
 # others
 RUN docker-php-ext-install \
 	soap \
@@ -116,35 +119,15 @@ RUN docker-php-ext-install \
 
 # PECL
 RUN docker-php-pecl-install \
-#	ssh2-1.0 \
-	redis-3.0 \
-	apcu-5.1.7
-
-# SSH2
-# TODO PECL is buggy, we must compile it.
-RUN git clone https://github.com/php/pecl-networking-ssh2.git /usr/src/php/ext/ssh2 \
-	&& docker-php-ext-install ssh2
-
-# Memcached
-# TODO PECL not available for PHP 7 yet, we must compile it.
-RUN apt-get update \
-	&& apt-get install -y \
-	libmemcached-dev \
-	libmemcached11
-
-RUN cd /tmp \
-	&& git clone -b php7 https://github.com/php-memcached-dev/php-memcached \
-	&& cd php-memcached \
-	&& phpize \
-	&& ./configure \
-	&& make \
-	&& cp /tmp/php-memcached/modules/memcached.so /usr/local/lib/php/extensions/no-debug-non-zts-20151012/memcached.so \
-	&& docker-php-ext-enable memcached
+	ssh2-1.1.2 \
+	redis-3.1.6 \
+	apcu-5.1.9 \
+	memcached-3.0.4
 
 # Install XDebug, but not enable by default. Enable using:
 # * php -d$XDEBUG_EXT vendor/bin/phpunit
 # * php_xdebug vendor/bin/phpunit
-RUN pecl install xdebug-2.5.0
+RUN pecl install xdebug-2.6.0
 ENV XDEBUG_EXT zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so
 RUN alias php_xdebug="php -d$XDEBUG_EXT vendor/bin/phpunit"
 
@@ -174,7 +157,7 @@ ADD php.ini /usr/local/etc/php/conf.d/docker-php.ini
 
 ## NodeJS, NPM
 # Install NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
 	&& apt-get install -y nodejs
 
 # Install Yarn
@@ -196,13 +179,12 @@ RUN npm install -g bower
 
 # MariaDB
 RUN apt-get update \
-	&& apt-get install -y software-properties-common \
-	&& apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db \
-	&& add-apt-repository 'deb [arch=amd64,i386] http://mirror.vpsfree.cz/mariadb/repo/10.1/debian jessie main'
+	&& apt-get install -y software-properties-common dirmngr \
+	&& apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8   \
+	&& add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mirror.vpsfree.cz/mariadb/repo/10.2/debian stretch main'
 
 RUN apt-get update \
-	&& apt-get install -y mariadb-server \
-	&& mysql_install_db
+	&& apt-get install -y mariadb-server
 
 VOLUME /var/lib/mysql
 
