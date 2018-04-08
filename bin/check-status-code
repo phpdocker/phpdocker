@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Usage:
-# URL="https://www.prospanek.cz" check-status-code
-# URL="https://www.prospanek.cz" STATUS=200 check-status-code
-# URL="https://www.prospanek.cz" STATUS=301 check-status-code
+# URL="http://example.com" check-status-code
+# URL="http://example.com" STATUS=200 check-status-code
+# URL="http://example.com" STATUS=301 check-status-code
 
 RESPONSE_STATUS=$(curl --write-out "%{http_code}\n" --silent --insecure --output /dev/null $URL)
 echo $RESPONSE_STATUS
