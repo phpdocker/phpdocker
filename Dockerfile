@@ -117,7 +117,7 @@ RUN docker-php-ext-install \
 # PECL
 RUN docker-php-pecl-install \
 	ssh2-0.13 \
-	redis-2.2.8 \
+	redis-3.1.6 \
 	apcu-4.0.11 \
 	memcached-2.2.0
 
