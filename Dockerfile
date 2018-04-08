@@ -67,11 +67,6 @@ RUN docker-php-ext-install \
 	pdo \
 	pdo_mysql
 
-# mcrypt
-RUN apt-get update \
-	&& apt-get install -y libmcrypt-dev \
-	&& docker-php-ext-install mcrypt
-
 # strings
 RUN docker-php-ext-install \
 	gettext \
