@@ -120,8 +120,8 @@ RUN docker-php-ext-install -j$(nproc) \
 # PECL
 RUN docker-php-pecl-install \
 	ssh2-1.1.2 \
-	redis-3.1.6 \
-	apcu-5.1.9 \
+	redis-4.0.2 \
+	apcu-5.1.11 \
 	memcached-3.0.4
 
 # Install XDebug, but not enable by default. Enable using:
