@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:7.4-fpm
 
 MAINTAINER Jaroslav Hranicka <hranicka@outlook.com>
 
@@ -68,9 +68,11 @@ RUN docker-php-ext-install -j$(nproc) \
 	pdo_mysql
 
 # strings
-RUN docker-php-ext-install -j$(nproc) \
-	gettext \
-	mbstring
+RUN apt-get update \
+    && apt-get install -y libonig-dev \
+    && docker-php-ext-install -j$(nproc) \
+	    gettext \
+	    mbstring
 
 # math
 RUN apt-get update \
@@ -129,7 +131,7 @@ RUN docker-php-pecl-install \
 # * php -d$XDEBUG_EXT vendor/bin/phpunit
 # * php_xdebug vendor/bin/phpunit
 RUN pecl install xdebug-2.8.0
-ENV XDEBUG_EXT zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so
+ENV XDEBUG_EXT zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20190902/xdebug.so
 RUN alias php_xdebug="php -d$XDEBUG_EXT vendor/bin/phpunit"
 
 # Install composer and put binary into $PATH
