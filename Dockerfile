@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.3-fpm
 
 MAINTAINER Jaroslav Hranicka <hranicka@outlook.com>
 
@@ -119,16 +119,16 @@ RUN docker-php-ext-install -j$(nproc) \
 
 # PECL
 RUN docker-php-pecl-install \
-	ssh2-1.1.2 \
-	redis-4.0.2 \
-	apcu-5.1.11 \
-	memcached-3.0.4
+	ssh2-1.2 \
+	redis-5.1.1 \
+	apcu-5.1.18 \
+	memcached-3.1.4
 
 # Install XDebug, but not enable by default. Enable using:
 # * php -d$XDEBUG_EXT vendor/bin/phpunit
 # * php_xdebug vendor/bin/phpunit
-RUN pecl install xdebug-2.6.0
-ENV XDEBUG_EXT zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20170718/xdebug.so
+RUN pecl install xdebug-2.8.0
+ENV XDEBUG_EXT zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so
 RUN alias php_xdebug="php -d$XDEBUG_EXT vendor/bin/phpunit"
 
 # Install composer and put binary into $PATH
