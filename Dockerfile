@@ -158,8 +158,8 @@ ADD php.ini /usr/local/etc/php/conf.d/docker-php.ini
 
 ## NodeJS, NPM
 # Install NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-	&& apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+    && apt-get install -y nodejs
 
 # Install Yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
