@@ -1,5 +1,8 @@
 # phpdocker/phpdocker
 
+> Usage of this image is not recommended. Instead, prefer multiple specialized images.
+
+
 ## Usage
 
 * Docker image is available at [Docker Hub](https://hub.docker.com/r/phpdocker/phpdocker/).
