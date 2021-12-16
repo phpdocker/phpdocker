@@ -1,4 +1,4 @@
-FROM php:8.1-fpm
+FROM php:8.0-fpm
 
 MAINTAINER Jaroslav Hranicka <hranicka@outlook.com>
 
@@ -130,7 +130,7 @@ RUN docker-php-pecl-install \
 # * php -d$XDEBUG_EXT vendor/bin/phpunit
 # * php_xdebug vendor/bin/phpunit
 RUN pecl install xdebug-3.1.2
-ENV XDEBUG_EXT zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20201009/xdebug.so
+ENV XDEBUG_EXT zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20200930/xdebug.so
 RUN alias php_xdebug="php -d$XDEBUG_EXT vendor/bin/phpunit"
 
 # Install composer and put binary into $PATH
