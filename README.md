@@ -61,7 +61,8 @@ Usage: `URL="https://www.example.com" STATUS=403 check-status-code`
 * You can type PHP commands, eg. `php -r "echo 1;"`.
 * Each Docker image contains ONLY ONE VERSION OF PHP, so:
 	* If you need PHP 5.6, use `phpdocker/phpdocker:5.6`.
-	* If you need PHP 7.2, use `phpdocker/phpdocker:7.2`.
+	* If you need PHP 7.4, use `phpdocker/phpdocker:7.4`.
+	* If you need PHP 8.1, use `phpdocker/phpdocker:8.1`.
 
 ### MariaDB
 

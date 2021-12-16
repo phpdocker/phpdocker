@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8.1-fpm
 
 MAINTAINER Jaroslav Hranicka <hranicka@outlook.com>
 
@@ -46,7 +46,6 @@ RUN apt-get update \
 	libxslt-dev \
 	&& docker-php-ext-install -j$(nproc) \
 		dom \
-		xmlrpc \
 		xsl
 
 # images
@@ -122,16 +121,16 @@ RUN docker-php-ext-install -j$(nproc) \
 
 # PECL
 RUN docker-php-pecl-install \
-	ssh2-1.2 \
-	redis-5.1.1 \
-	apcu-5.1.18 \
+	ssh2-1.3.1 \
+	redis-5.3.4 \
+	apcu-5.1.21 \
 	memcached-3.1.4
 
 # Install XDebug, but not enable by default. Enable using:
 # * php -d$XDEBUG_EXT vendor/bin/phpunit
 # * php_xdebug vendor/bin/phpunit
-RUN pecl install xdebug-2.8.0
-ENV XDEBUG_EXT zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20190902/xdebug.so
+RUN pecl install xdebug-3.1.2
+ENV XDEBUG_EXT zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20201009/xdebug.so
 RUN alias php_xdebug="php -d$XDEBUG_EXT vendor/bin/phpunit"
 
 # Install composer and put binary into $PATH
@@ -160,7 +159,7 @@ ADD php.ini /usr/local/etc/php/conf.d/docker-php.ini
 
 ## NodeJS, NPM
 # Install NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get install -y nodejs
 
 # Install Yarn
@@ -181,11 +180,9 @@ RUN npm install -g bower
 # MariaDB
 RUN apt-get update \
 	&& apt-get install -y software-properties-common dirmngr \
-	&& apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8   \
-	&& add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mirror.vpsfree.cz/mariadb/repo/10.2/debian stretch main'
-
-RUN apt-get update \
-	&& apt-get install -y mariadb-server
+    && apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 \
+	&& add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.6/debian bullseye main' \
+    && apt-get update && apt-get install -y mariadb-server galera-4 mariadb-client libmariadb3 mariadb-backup mariadb-common
 
 VOLUME /var/lib/mysql
 
