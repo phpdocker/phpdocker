@@ -29,7 +29,8 @@ RUN apt-get update \
 	&& apt-get install -y \
 		openssl \
 		git \
-		gnupg2
+		gnupg2 \
+        unzip
 
 
 # PHP
