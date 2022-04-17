@@ -1,7 +1,9 @@
 # phpdocker/phpdocker
 
 > THIS PROJECT IS ABANDONED
+> 
 > Use of this image is not recommended. Instead, prefer multiple specialized images.
+> 
 > See https://gitlab.com/hranicka/docker-nginx, https://gitlab.com/hranicka/docker-php, https://gitlab.com/hranicka/docker-httpd
 
 
